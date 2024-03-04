@@ -1,11 +1,43 @@
+import re
+emailRegex = re.compile(r'''(
+    [a-zA-Z0-9._%+-]+     # username
+    @                               # @ symbol
+     [a-zA-Z0-9.-]+           # domain name
+     (\.[a-zA-Z]{2,4})         # dot-something
+  )''', re.VERBOSE)
+# store matched addresses in an array called "matches"
+matches = []
+text = """
+An example text containing an email address, such as user@example.com or something like hello@example.com
+"""
+# search the text and append matched addresses to the "matches" array
+for groups in emailRegex.findall(text):
+    matches.append(groups[0])
+# matches => ['user@example.com', 'hello@example.com']
+print(matches)
+А этот скрипт Python поможет сопоставить номера телефонов в тексте:
 
-                                                            
-                                                            
-                                                            
-                                                            
-                                                            
-                                        
-                                            
-                                                           
-                                                                         test
+import re
+text = """
+Here is an example string containing various numbers, some 
+of which are not phone numbers.
+Business Address
+4553-A First Street
+Washington, DC 20001
+202-555-6473
+301-555-8118
+"""
+phoneRegex = re.compile(r'''(
+    (\d{3}|\(\d{3}\))?                 # area code
+    (\s|-|\.)?                             # separator
+    (\d{3})                               # first 3 digits
+    (\s|-|\.)                               # separator
+    (\d{4})                               # last 4 digits
+    (\s*(ext|x|ext.)\s*(\d{2,5}))?    # extension
+    )''', re.VERBOSE)
+matches = []
+for numbers in phoneRegex.findall(text):
+  matches.append(numbers[0])
+# matches => ['202-555-6473', '301-555-8118']
+print(matches)
  
